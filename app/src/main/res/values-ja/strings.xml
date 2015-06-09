@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BSScanner</string>
+    <string name="ble_not_supported">BLEをサポートしていません</string>
+    <string name="bt_not_supported">Bluetoothをサポートしていません</string>
+    <string name="bt_not_enabled">Bluetoothが有効化されていません</string>
+    <string name="label_ibeacon">iBeacon</string>
+    <string name="label_not_ibeacon">not iBeacon</string>
+    <!-- Scan -->
+    <string name="action_clear">リストをクリア</string>
+    <string name="action_scan">=====スキャン開始=====</string>
+    <string name="action_stop">停止</string>
+    <string name="action_dump">保存</string>
+    <string name="action_license">ライセンス</string>
+    <!-- dialog -->
+    <string name="license_title">OSSライセンス</string>
+    <string name="license_body">youten/iBeaconDetector\nhttps://github.com/youten/iBeaconDetector\n\nRadiusNetworks / android-ibeacon-service\nhttps://github.com/RadiusNetworks/android-ibeacon-service</string>
+    <!-- dump -->
+    <string name="dump_failed">保存できませんでした</string>
+    <string name="dump_succeeded_suffix"> 保存しました</string>
+    <!-- sensor_label -->
+    <string name="attitude">加速度+地磁気センサ:</string>
+    <string name="orientation">傾きセンサ:</string>
+    <string name="azimuth"> 方位:</string>
+    <string name="pitch"> 傾斜:</string>
+    <string name="roll"> 回転:</string>
+    <!-- activity_label -->
+    <string name="phone_attitude"> 姿勢:</string>
+    <string name="point_num"> No.</string>
+    <string name="scan_repeat"> スキャン回数:</string>
+    <string name="scan_time"> スキャン時間:</string>
+    <string name="scanned_ap"> アクセスポイント:</string>
+    <string name="white_list"> ホワイトリスト:</string>
+    <string name="white_list_bs"> ホワイトリスト(BS)</string>
+    <string name="white_list_bs_value">00:00:00:00:00:00,00:11:22:33:44:55,00:01:23:45:67:89,</string>
+</resources><!-- Copyright (c) 2015 YA <ya.androidapp@gmail.com> All rights reserved. -->
