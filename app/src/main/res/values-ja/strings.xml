@@ -6,6 +6,8 @@
     <string name="bt_not_enabled">Bluetoothが有効化されていません</string>
     <string name="label_ibeacon">iBeacon</string>
     <string name="label_not_ibeacon">not iBeacon</string>
+    <string name="label_wifi">WiFi</string>
+    <string name="press_again">もう一度押してください</string>
     <!-- Scan -->
     <string name="action_clear">リストをクリア</string>
     <string name="action_scan">=====スキャン開始=====</string>
@@ -19,18 +21,26 @@
     <string name="dump_failed">保存できませんでした</string>
     <string name="dump_succeeded_suffix"> 保存しました</string>
     <!-- sensor_label -->
-    <string name="attitude">加速度+地磁気センサ:</string>
+    <string name="attitude">加速度+地磁気:</string>
     <string name="orientation">傾きセンサ:</string>
     <string name="azimuth"> 方位:</string>
     <string name="pitch"> 傾斜:</string>
     <string name="roll"> 回転:</string>
     <!-- activity_label -->
+    <string name="here">観測点</string>
     <string name="phone_attitude"> 姿勢:</string>
     <string name="point_num"> No.</string>
-    <string name="scan_repeat"> スキャン回数:</string>
-    <string name="scan_time"> スキャン時間:</string>
-    <string name="scanned_ap"> アクセスポイント:</string>
-    <string name="white_list"> ホワイトリスト:</string>
-    <string name="white_list_bs"> ホワイトリスト(BS)</string>
-    <string name="white_list_bs_value">00:00:00:00:00:00,00:11:22:33:44:55,00:01:23:45:67:89,</string>
+    <string name="scan_repeat"> 回数:</string>
+    <string name="scan_time"> 時間:</string>
+    <string name="scanned_ap"> AP:</string>
+    <string name="white_list">ホワイトリスト:</string>
+    <string name="white_list_bs">ホワイトリスト(BS):</string>
+    <string name="white_list_wifi">ホワイトリスト(WiFi):</string>
+    <string name="white_list_wifi_value"></string>
+    <string name="white_list_bs_value"></string>
+    <!-- speech -->
+    <string name="speech_started">開始しました</string>
+    <string name="speech_stopped">停止しました</string>
+    <string name="speech_move">移動してください</string>
+    <string name="speech_move_after_check">確認後、移動してください</string>
 </resources><!-- Copyright (c) 2015 YA <ya.androidapp@gmail.com> All rights reserved. -->

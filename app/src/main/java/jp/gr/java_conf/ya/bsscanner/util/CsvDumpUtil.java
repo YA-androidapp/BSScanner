@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class CsvDumpUtil {
-    private static final String HEADER_BS = "DisplayName,MAC Address,RSSI,Last Updated,iBeacon flag,Proximity UUID,major,minor,TxPower";
-    private static final String HEADER_WIFI = "Position Name,MAC Address,Last Updated,RSSI,Frequency,SSID,Capabilities";
+    private static final String HEADER_BS   = "Position Name,BSSID,RSSI,Last Updated,DisplayName,iBeacon flag,Proximity UUID,major,minor,TxPower";
+    private static final String HEADER_WIFI = "Position Name,BSSID,RSSI,Last Updated,DisplayName,timestamp,Frequency,Capabilities";
 
     private static final String DUMP_PATH = "/BSScanner/";
 

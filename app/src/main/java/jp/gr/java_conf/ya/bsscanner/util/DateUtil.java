@@ -58,6 +58,10 @@ public class DateUtil {
         return "Bs_" + mFilenameFormater.get().format(new Date()) + ".csv.txt";
     }
 
+    public static String get_nowFftCsvFilename() {
+        return "Fft_" + mFilenameFormater.get().format(new Date()) + ".csv.txt";
+    }
+
     public static String get_nowWifiCsvFilename() {
         return "Wifi_" + mFilenameFormater.get().format(new Date()) + ".csv.txt";
     }

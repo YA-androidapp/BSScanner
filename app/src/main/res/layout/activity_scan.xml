@@ -112,33 +112,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/scanned_ap"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/ap"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:width="100dp"
-                android:height="200dp"
-                android:background="@android:color/white"
-                android:maxHeight="200dp"
-                android:maxWidth="100dp"
-                android:minHeight="200dp"
-                android:minWidth="100dp"
-                android:text=""
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/white_list"
                 android:textSize="12sp" />
 
@@ -147,22 +120,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:width="200dp"
-                android:height="200dp"
+                android:width="100dp"
+                android:height="100dp"
                 android:background="@android:color/white"
                 android:hint="@string/white_list_bs"
                 android:maxHeight="200dp"
                 android:maxWidth="200dp"
-                android:minHeight="200dp"
-                android:minWidth="200dp"
+                android:minHeight="100dp"
+                android:minWidth="100dp"
                 android:text="@string/white_list_bs_value"
                 android:textColor="@android:color/holo_green_light" />
-        </LinearLayout>
 
+            <EditText
+                android:id="@+id/white_list_wifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:width="100dp"
+                android:height="100dp"
+                android:background="@android:color/white"
+                android:hint="@string/white_list_wifi"
+                android:maxHeight="200dp"
+                android:maxWidth="200dp"
+                android:minHeight="100dp"
+                android:minWidth="100dp"
+                android:text="@string/white_list_wifi_value"
+                android:textColor="@android:color/holo_green_light" />
+        </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ListView
+            android:id="@+id/list1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
+        <ListView
+            android:id="@+id/list2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
 </LinearLayout><!-- Copyright (c) 2015 YA <ya.androidapp@gmail.com> All rights reserved. -->
+

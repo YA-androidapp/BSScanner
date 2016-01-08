@@ -4,7 +4,7 @@ BSScanner
 ## Overview
 ---
 
-Bluetooth Smart(Bluetooth Low Energy)及び無線LANを用いた位置推定のテストのためのAndroidアプリ
+Bluetooth Smart(Bluetooth Low Energy)及び無線LAN，環境音を用いた位置推定のテストのためのAndroidアプリ
 
 ## Install
 ---

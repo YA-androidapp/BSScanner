@@ -141,12 +141,12 @@ public class ScannedDevice {
 
     public String toCsv() {
         StringBuilder sb = new StringBuilder();
-        // DisplayName,Position Name,MAC Addr,Last Updated,RSSI,iBeacon flag,Proximity UUID,major,minor,TxPower
-        sb.append(mDisplayName).append(",");
+        // Position Name,BSSID,RSSI,Last Updated,DisplayName,iBeacon flag,Proximity UUID,major,minor,TxPower
         sb.append("#").append(String.format("%1$05d", mPointNum)).append(",");
         sb.append(mDevice.getAddress()).append(",");
-        sb.append(DateUtil.get_yyyyMMddHHmmssSSS(mLastUpdatedMs)).append(",");
         sb.append(mRssi).append(",");
+        sb.append(DateUtil.get_yyyyMMddHHmmssSSS(mLastUpdatedMs)).append(",");
+        sb.append(mDisplayName).append(",");
         if (mIBeacon == null) {
             sb.append("false,,0,0,0");
         } else {

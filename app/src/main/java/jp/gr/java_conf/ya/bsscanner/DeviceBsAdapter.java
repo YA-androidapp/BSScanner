@@ -36,7 +36,7 @@ import java.util.Set;
 import jp.gr.java_conf.ya.bsscanner.util.DateUtil;
 import jp.gr.java_conf.ya.bsscanner.util.ScannedDevice;
 
-public class DeviceAdapter extends ArrayAdapter<ScannedDevice> {
+public class DeviceBsAdapter extends ArrayAdapter<ScannedDevice> {
     private static final String PREFIX_RSSI = "RSSI:";
     private static final String PREFIX_LASTUPDATED = "Last Updated:";
     private static int mPointNum = -1;
@@ -46,7 +46,7 @@ public class DeviceAdapter extends ArrayAdapter<ScannedDevice> {
     private List<ScannedDevice> mList;
     private String mWhiteList;
 
-    public DeviceAdapter(Context context, int resId, List<ScannedDevice> objects) {
+    public DeviceBsAdapter(Context context, int resId, List<ScannedDevice> objects) {
         super(context, resId, objects);
 
         mResId = resId;
@@ -76,48 +76,56 @@ public class DeviceAdapter extends ArrayAdapter<ScannedDevice> {
         final Resources res = convertView.getContext().getResources();
 
         address.setText(item.getDevice().getAddress());
+        lastupdated.setText(PREFIX_LASTUPDATED + DateUtil.get_yyyyMMddHHmmssSSS(item.getLastUpdatedMs()));
+        name.setText(item.getDisplayName());
         point.setText("#" + item.getPointNum());
         rssi.setText(PREFIX_RSSI + Integer.toString(item.getRssi()));
 
-        if (item.getIBeacon() != null) {
+        if (mWhiteList.equals("")) {
+            address.setTextColor(res.getColor(android.R.color.holo_blue_bright));
+            lastupdated.setTextColor(res.getColor(android.R.color.holo_blue_bright));
+            name.setTextColor(res.getColor(android.R.color.holo_blue_bright));
+            point.setTextColor(res.getColor(android.R.color.holo_blue_bright));
+            rssi.setTextColor(res.getColor(android.R.color.holo_blue_bright));
+        } else if (item.getIBeacon() != null) {
             if (("," + mWhiteList + ",").contains(item.getDevice().getAddress())) {
                 if (item.getPointNum() == mPointNum) {
                     address.setTextColor(res.getColor(android.R.color.holo_blue_dark));
+                    lastupdated.setTextColor(res.getColor(android.R.color.holo_blue_dark));
+                    name.setTextColor(res.getColor(android.R.color.holo_blue_dark));
                     point.setTextColor(res.getColor(android.R.color.holo_blue_dark));
                     rssi.setTextColor(res.getColor(android.R.color.holo_blue_dark));
                 } else {
                     address.setTextColor(res.getColor(android.R.color.holo_green_light));
+                    lastupdated.setTextColor(res.getColor(android.R.color.holo_green_light));
+                    name.setTextColor(res.getColor(android.R.color.holo_green_light));
                     point.setTextColor(res.getColor(android.R.color.holo_green_light));
                     rssi.setTextColor(res.getColor(android.R.color.holo_green_light));
                 }
             } else {
                 address.setTextColor(Color.GRAY);
+                lastupdated.setTextColor(Color.GRAY);
+                name.setTextColor(Color.GRAY);
                 point.setTextColor(Color.GRAY);
                 rssi.setTextColor(Color.GRAY);
             }
 
             ibeaconInfo.setText(res.getString(R.string.label_ibeacon) + "\n" + item.getIBeacon().toString());
-            lastupdated.setText(PREFIX_LASTUPDATED + DateUtil.get_yyyyMMddHHmmssSSS(item.getLastUpdatedMs()));
-            name.setText(item.getDisplayName());
             scanRecord.setText(item.getScanRecordHexString());
 
             ibeaconInfo.setVisibility(View.VISIBLE);
-            lastupdated.setVisibility(View.VISIBLE);
-            name.setVisibility(View.VISIBLE);
             scanRecord.setVisibility(View.VISIBLE);
         } else {
             address.setTextColor(Color.GRAY);
+            lastupdated.setTextColor(Color.GRAY);
+            name.setTextColor(Color.GRAY);
             point.setTextColor(Color.GRAY);
             rssi.setTextColor(Color.GRAY);
 
             ibeaconInfo.setText("");
-            lastupdated.setText("");
-            name.setText("");
             scanRecord.setText("");
 
             ibeaconInfo.setVisibility(View.GONE);
-            lastupdated.setVisibility(View.GONE);
-            name.setVisibility(View.GONE);
             scanRecord.setVisibility(View.GONE);
         }
 
@@ -147,7 +155,6 @@ public class DeviceAdapter extends ArrayAdapter<ScannedDevice> {
         final long now = System.currentTimeMillis();
         mList.add(new ScannedDevice(pointNum, newDevice, rssi, scanRecord, now));
 
-        // sort by Point and Address
         Collections.sort(mList, new Comparator<ScannedDevice>() {
             @Override
             public int compare(ScannedDevice lhs, ScannedDevice rhs) {
@@ -155,18 +162,23 @@ public class DeviceAdapter extends ArrayAdapter<ScannedDevice> {
 
                 c = (Integer.toString(lhs.getPointNum())).compareTo(Integer.toString(rhs.getPointNum()));
                 if (c != 0)
-                    return c;
+                    return -1 * c;
 
                 c = (lhs.getDevice().getAddress()).compareTo(rhs.getDevice().getAddress());
                 if (c != 0)
-                    return c;
+                    return -1 * c;
 
                 if ((lhs.getRssi() == 0) || (lhs.getRssi() < rhs.getRssi()))
                     return 1;
                 else if ((rhs.getRssi() == 0) || (lhs.getRssi() > rhs.getRssi()))
                     return -1;
-                else
-                    return 0;
+
+                if ((lhs.getLastUpdatedMs() == 0) || (lhs.getLastUpdatedMs() < rhs.getLastUpdatedMs()))
+                    return 1;
+                else if ((rhs.getLastUpdatedMs() == 0) || (lhs.getLastUpdatedMs() > rhs.getLastUpdatedMs()))
+                    return -1;
+
+                return 0;
             }
         });
 
