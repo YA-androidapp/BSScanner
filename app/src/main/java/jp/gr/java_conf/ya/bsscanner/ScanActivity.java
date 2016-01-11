@@ -154,7 +154,7 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
                                 });
                             }
                             stopBsScan();
-                            sleep(1000L);
+                            playTone();
                             runOnUiThread(new Runnable() {
                                 public void run() {
                                     scanRepeat.setBackgroundColor(Color.YELLOW);
@@ -162,28 +162,25 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
                                 }
                             });
                             audiorec(pointNumber.getValue(), scanTimeValue);
-                            sleep(500L);
-                            runOnUiThread(new Runnable() {
-                                public void run() {
-                                    scanRepeat.setValue(scanRepeat.getValue() - 1);
-                                    scanTime.setValue(scanTimeValue);
-                                    pointNumber.setValue(pointNumber.getValue() + 1);
-                                }
-                            });
-                            playTone();
+                            speechText(Integer.toString(i));
                         } else {
                             stopBsScan();
-                            runOnUiThread(new Runnable() {
-                                public void run() {
-                                    scanRepeat.setValue(scanRepeatValue);
-                                    scanTime.setValue(scanTimeValue);
-                                    pointNumber.setValue(pointNumber.getValue() + 1);
-                                }
-                            });
                             speechText(getString(R.string.speech_stopped));
                             break;
                         }
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                pointNumber.setValue(pointNumber.getValue() + 1);
+                                scanRepeat.setValue(scanRepeat.getValue() - 1);
+                                scanTime.setValue(scanTimeValue);
+                            }
+                        });
                     }
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            scanRepeat.setValue(scanRepeatValue);
+                        }
+                    });
                     if (r2Enabled) {
                         speechText(getString(R.string.speech_move));
                     } else {
@@ -191,7 +188,6 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
                     }
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            scanRepeat.setValue(scanRepeatValue);
                             scanRepeat.setBackgroundColor(Color.WHITE);
                             scanTime.setBackgroundColor(Color.WHITE);
                         }
@@ -221,7 +217,7 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
         return null;
     }
 
-    private void audiorec(final int pointNumber, final int scanTime) {
+    private void audiorec(final int pointNumber, final int scanTimeVal) {
         audioRec = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 SAMPLING_RATE, AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, bufSize * 2);
@@ -230,12 +226,26 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
 
         byte buf[] = new byte[bufSize * 2];
         final long start = System.currentTimeMillis();
-        long th = 1000 * scanTime;
+        long th = 1000 * scanTimeVal;
 
         double[] dbfs = new double[FFT_SIZE / 2];
         Arrays.fill(dbfs, 0);
 
-        while ((System.currentTimeMillis() - start) < th) {
+        long pre_ti = 0;
+        while (true) {
+            long t = System.currentTimeMillis() - start;
+            if (t > th)
+                break;
+            final int ti = (int) (t / 1000);
+            if (ti != pre_ti) {
+                pre_ti = ti;
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        scanTime.setValue(scanTimeVal - ti);
+                    }
+                });
+            }
+
             audioRec.read(buf, 0, buf.length);
 
             //エンディアン変換
