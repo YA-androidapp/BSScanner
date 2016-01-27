@@ -275,14 +275,11 @@ public class ScanActivity extends Activity implements BluetoothAdapter.LeScanCal
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         sb1.append("//f");
-        sb2.append("#");
-        sb2.append(pointNumber);
+        sb2.append("#").append(String.format("%1$05d", pointNumber)).append(",").append(DateUtil.get_yyyyMMddHHmmssSSS(System.currentTimeMillis()));
         for (int i = 0; i < FFT_SIZE; i += 2) {
             // パワーの時間方向の平均
-            sb1.append(",");
-            sb1.append(String.format("%5.1f", (resol * i / 2)));
-            sb2.append(",");
-            sb2.append(String.format("%.3f", (2 * dbfs[i / 2] / FFT_SIZE)));
+            sb1.append(",").append(String.format("%5.1f", (resol * i / 2)));
+            sb2.append(",").append(String.format("%.3f", (2 * dbfs[i / 2] / FFT_SIZE)));
         }
         sb1.append("\n");
         sb2.append("\n");
